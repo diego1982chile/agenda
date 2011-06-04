@@ -43,7 +43,7 @@
                 <br />
                 <h4>Los Requisitos son:</h4>
                 <ol>
-                    <li>El diego debe mascarla</li>
+                    <li>El meji debe mascarla</li>
                     <li>R2</li>
                     <li>R3</li>
                     <li>R4</li>
