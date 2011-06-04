@@ -1,0 +1,58 @@
+# # Populate this file with data to be loaded by your ORM's *:data-load task.
+# # You can create multiple files in this directory (i.e. 010_users.yml,
+# # 020_articles.yml, etc) which will be loaded in alphabetical order.
+# # 
+# # See documentation for your ORM's *:data-load task for more information.
+# 
+# User:
+#   fabien:
+#     username: fabien
+#     password: changeme
+#     name:     Fabien Potencier
+#     email:    fabien.potencier@symfony-project.com
+#   kris:
+#     username: Kris.Wallsmith
+#     password: changeme
+#     name:     Kris Wallsmith
+#     email:    kris.wallsmith@symfony-project.com
+
+Requisito:
+  R1:
+    nombre_requisito: R1
+    descripcion_requisito: DR1
+  R2:
+    nombre_requisito: R2
+    descripcion_requisito: DR2
+  R3:
+    nombre_requisito: R3
+    descripcion_requisito: DR3
+TipoLicencia:
+  A:
+    nombre_tipo_licencia: CLASE A
+    descripcion_tipo_licencia: DLA
+  B:
+    nombre_tipo_licencia: CLASE B
+    descripcion_tipo_licencia: DLB
+  C:
+    nombre_tipo_licencia: CLASE C
+    descripcion_tipo_licencia: DLC
+Tramite:
+  T1:
+    nombre_tramite: Primera
+    descripcion_tramite: DT1
+  T2:
+    nombre_tramite: Renovación
+    descripcion_tramite: DT2
+ConjuntoRequisitos:
+  CR1:
+    Requisito: R1
+    TipoLicencia: A
+    Tramite: T1
+  CR2:
+    Requisito: R2
+    TipoLicencia: A
+    Tramite: T1
+  CR3:
+    Requisito: R3
+    TipoLicencia: A
+    Tramite: T1

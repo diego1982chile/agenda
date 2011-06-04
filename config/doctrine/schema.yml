@@ -1,0 +1,194 @@
+ConjuntoExamenes:
+  connection: doctrine
+  tableName: conjunto_examenes
+  columns:
+    id_tramite:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    id_examen:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    id_tipo_licencia:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+  relations:
+    TipoLicencia:
+      local: id_tipo_licencia
+      foreign: id_tipo_licencia
+      type: one
+    Tramite:
+      local: id_tramite
+      foreign: id_tramite
+      type: one
+    Examen:
+      local: id_examen
+      foreign: id_examen
+      type: one
+ConjuntoRequisitos:
+  connection: doctrine
+  tableName: conjunto_requisitos
+  columns:
+    id_requisito:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    id_tramite:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    id_tipo_licencia:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+  relations:
+    TipoLicencia:
+      local: id_tipo_licencia
+      foreign: id_tipo_licencia
+      type: one
+    Requisito:
+      local: id_requisito
+      foreign: id_requisito
+      type: one
+    Tramite:
+      local: id_tramite
+      foreign: id_tramite
+      type: one
+Examen:
+  connection: doctrine
+  tableName: examen
+  columns:
+    id_examen:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    nombre_examen:
+      type: string(40)
+      fixed: true
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    descripcion_examen:
+      type: string(512)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    ConjuntoExamenes:
+      local: id_examen
+      foreign: id_examen
+      type: many
+Requisito:
+  connection: doctrine
+  tableName: requisito
+  columns:
+    id_requisito:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    nombre_requisito:
+      type: string(40)
+      fixed: true
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    descripcion_requisito:
+      type: string(512)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    ConjuntoRequisitos:
+      local: id_requisito
+      foreign: id_requisito
+      type: many
+TipoLicencia:
+  connection: doctrine
+  tableName: tipo_licencia
+  columns:
+    id_tipo_licencia:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    nombre_tipo_licencia:
+      type: string(20)
+      fixed: true
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    descripcion_tipo_licencia:
+      type: string(512)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    ConjuntoExamenes:
+      local: id_tipo_licencia
+      foreign: id_tipo_licencia
+      type: many
+    ConjuntoRequisitos:
+      local: id_tipo_licencia
+      foreign: id_tipo_licencia
+      type: many
+Tramite:
+  connection: doctrine
+  tableName: tramite
+  columns:
+    id_tramite:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    nombre_tramite:
+      type: string(40)
+      fixed: true
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    descripcion_tramite:
+      type: string(512)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    ConjuntoExamenes:
+      local: id_tramite
+      foreign: id_tramite
+      type: many
+    ConjuntoRequisitos:
+      local: id_tramite
+      foreign: id_tramite
+      type: many
