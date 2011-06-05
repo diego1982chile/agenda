@@ -56,3 +56,46 @@ ConjuntoRequisitos:
     Requisito: R3
     TipoLicencia: A
     Tramite: T1
+    
+    
+sfGuardUser:
+  User_admin:
+    first_name:     Jonnatan
+    last_name:      Oyarzun
+    email_address:  jony@gmail.com
+    username:       admin
+    password:       admin
+    is_super_admin: true
+    Profile:
+      apellido_paterno: Oyarzun
+      apellido_materno: Rodriguez
+    Groups:         [Group_admin]
+  User_normal:
+    first_name:     Diego
+    last_name:      Soto
+    email_address:  diego@gmail.com
+    username:       diego
+    password:       diego
+    is_super_admin: false
+    Profile:
+      apellido_paterno: Soto
+      apellido_materno: Materno
+    Groups:         [Group_normal]
+
+sfGuardGroup:
+  Group_admin:
+    name:           admin
+    description:    Administrator group
+    Permissions:    [Permission_admin]
+  Group_normal:
+    name:           normal
+    description:    Normal group
+    Permissions:    [Permission_normal]
+
+sfGuardPermission:
+  Permission_admin:
+    name:           admin
+    description:    Administrator permission
+  Permission_normal:
+    name:           normal
+    description:    Normal permission

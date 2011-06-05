@@ -51,10 +51,17 @@
             </li>
             <li>
                 <a href="contact.html">Contact</a>
-            </li>	
-		</ul><!-- end .sf-menu -->
-    
+            </li>
+            
+            
+            
+            
+        </ul><!-- end .sf-menu -->
+        
+        <?php include_partial('global/bienvenidousuario') ?>
+        
         <div id="free_for_job"></div><!-- end #free_for_job -->
+        
         </div><!-- end #menu_wrap -->
         
         <div id="small_banner_wrap" class="banner_about">
