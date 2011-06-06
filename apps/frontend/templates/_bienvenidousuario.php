@@ -1,26 +1,13 @@
 <?php if ($sf_user->isAuthenticated()) : ?>
-        <div style="float: right">
-<!--            <ul id="login">
-                <li style="overflow: hidden"><a href="#">Home</a></li>
-                <li><a href="#">Services</a></li>  
-            </ul>-->
-                Bienvenido <strong><?php echo $sf_user->getGuardUser()->getUsername()  ?> </strong>
-                        <a href="<?php echo url_for('sfGuardAuth/signout') ?>">Logout</a>
-            </p>
-        </div>
-        
+<div style="float: right">
+    <ul class="sf-menu">
+        <li>
+            <a href="#">Bienvenido <strong style="color: blueviolet"><?php echo $sf_user->getGuardUser()->getUsername()  ?> </strong></a>
+            <ul>
+                <li><a href="#">Editar tus datos</a></li>
+                <li><a href="<?php echo url_for('sfGuardAuth/signout') ?>">Salir/Cerrar sesion</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>        
 <?php endif; ?>
-<script type="text/javascript">
-    $(document).ready(function() { 
-        $("#login li").hover(function() {
-            $(this).stop().animate({
-                marginRight: "-70"
-            },250);
-            } , function() {
-                $(this).stop().animate({
-                    marginRight: "0"
-                }, 250);
-            });
-            
-    });
-</script>

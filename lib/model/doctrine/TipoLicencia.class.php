@@ -12,5 +12,8 @@
  */
 class TipoLicencia extends BaseTipoLicencia
 {
+    function __toString() {
+        return $this->getNombreTipoLicencia();
+    }
 
 }

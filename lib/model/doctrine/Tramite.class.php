@@ -12,5 +12,8 @@
  */
 class Tramite extends BaseTramite
 {
+    function __toString() {
+        return $this->getNombreTramite();
+    }
 
 }

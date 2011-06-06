@@ -58,6 +58,34 @@ ConjuntoRequisitos:
     Tramite: T1
     
     
+Examen:
+  E1:
+    nombre_examen: Prostata
+    descripcion_examen: Prostata
+  E2:
+    nombre_examen: Papanicolao
+    descripcion_examen: Papanicolao
+  E3:
+    nombre_examen: VIH
+    descripcion_examen: VIH
+    
+ConjuntoExamenes:
+  CE1:
+    Tramite: T1
+    Examen: E1
+    TipoLicencia: A
+  CE2:
+    Tramite: T1
+    Examen: E2
+    TipoLicencia: A
+  CE3:
+    Tramite: T1
+    Examen: E3
+    TipoLicencia: A
+    
+    
+    
+    
 sfGuardUser:
   User_admin:
     first_name:     Jonnatan
