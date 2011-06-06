@@ -18,6 +18,35 @@ class tramiteActions extends sfActions
     $this->requisitos = Doctrine_Core::getTable('Requisito')
       ->createQuery('a')
       ->execute();
+    $this->formsignin = new sfGuardFormSignin();
+    $this->tramiteselect = new TramiteSelectForm();
+    $this->tipolicenciaselect = new TipoLicenciaSelectForm();
+  }
+  public function executeCargar_requisitos(sfWebRequest $request)
+  {
+      $this->forwardUnless($id_licencia = $request->getParameter('id_licencia'), 'tramite', 'index');
+      $this->forwardUnless($id_tramite = $request->getParameter('id_tramite'), 'tramite', 'index');
+
+      $q = Doctrine_Query::create()
+        ->from('Requisito r')
+        ->innerJoin('r.ConjuntoRequisitos cr')
+        ->Where('cr.id_tramite = ? AND cr.id_tipo_licencia = ?', array($id_tramite, $id_licencia));
+      $requisitos = $q->execute();
+      return $this->renderPartial('tramite/listarequisitos', array('requisitos' => $requisitos));
+      
+  }
+  public function executeCargar_examenes(sfWebRequest $request)
+  {
+      $this->forwardUnless($id_licencia = $request->getParameter('id_licencia'), 'tramite', 'index');
+      $this->forwardUnless($id_tramite = $request->getParameter('id_tramite'), 'tramite', 'index');
+      
+      $q = Doctrine_Query::create()
+        ->from('Examen e')
+        ->innerJoin('e.ConjuntoExamenes ce')
+        ->Where('ce.id_tramite = ? AND ce.id_tipo_licencia = ?', array($id_tramite, $id_licencia));
+      $examenes = $q->execute();
+      return $this->renderPartial('tramite/listaexamenes', array('examenes' => $examenes));
+      
   }
 
   public function executeNew(sfWebRequest $request)
