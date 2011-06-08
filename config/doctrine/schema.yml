@@ -1,3 +1,250 @@
+ClaseAnterior:
+  connection: doctrine
+  tableName: clase_anterior
+  columns:
+    id_solicitud:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    id_tipo_licencia:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+  relations:
+    TipoLicencia:
+      local: id_tipo_licencia
+      foreign: id_tipo_licencia
+      type: one
+    SolicitudLicencia:
+      local: id_solicitud
+      foreign: id_solicitud
+      type: one
+
+Hora:
+  connection: doctrine
+  tableName: hora
+  columns:
+    id_hora:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    id_solicitud:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    fecha_hora:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    hora_ini:
+      type: time(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tipo:
+      type: string(20)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    SolicitudLicencia:
+      local: id_solicitud
+      foreign: id_solicitud
+      type: one
+Pago:
+  connection: doctrine
+  tableName: pago
+  columns:
+    id_pago:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    id_solicitud:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    fecha:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    monto:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    SolicitudLicencia:
+      local: id_solicitud
+      foreign: id_solicitud
+      type: one
+
+
+
+
+
+
+
+SolicitudLicencia:
+  connection: doctrine
+  tableName: solicitud_licencia
+  columns:
+    id_solicitud:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    id_tramite:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    rut:
+      type: string(10)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    user_id:
+      type: integer(5)
+      notnull: true
+    id_pago:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    id_hora:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    id_tipo_licencia:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    estado:
+      type: string(20)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    fecha_ultimo_control:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    fecha_control:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    restriccion:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    comuna_anterior:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    porta_licencia:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    motivo_no_porta_licencia:
+      type: string(200)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    es_donante:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    TipoLicencia:
+      local: id_tipo_licencia
+      foreign: id_tipo_licencia
+      type: one
+    Tramite:
+      local: id_tramite
+      foreign: id_tramite
+      type: one
+    Hora:
+      local: id_hora
+      foreign: id_hora
+      type: one
+    User:
+      class: sfGuardUser
+      foreign: id
+      local: user_id
+      type: one
+    Pago:
+      local: id_pago
+      foreign: id_pago
+      type: one
+    ClaseAnterior:
+      local: id_solicitud
+      foreign: id_solicitud
+      type: many
+      
+      
+      
+      
+      
 ConjuntoExamenes:
   connection: doctrine
   tableName: conjunto_examenes
@@ -39,7 +286,7 @@ ConjuntoRequisitos:
   columns:
     id_requisito:
       type: integer(4)
-      fixed: false
+      fixed: falsemany
       unsigned: false
       primary: true
       autoincrement: false

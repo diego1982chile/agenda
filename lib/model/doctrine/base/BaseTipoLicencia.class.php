@@ -12,17 +12,23 @@ Doctrine_Manager::getInstance()->bindComponent('TipoLicencia', 'doctrine');
  * @property string $descripcion_tipo_licencia
  * @property Doctrine_Collection $ConjuntoExamenes
  * @property Doctrine_Collection $ConjuntoRequisitos
+ * @property Doctrine_Collection $ClaseAnterior
+ * @property Doctrine_Collection $SolicitudLicencia
  * 
  * @method integer             getIdTipoLicencia()            Returns the current record's "id_tipo_licencia" value
  * @method string              getNombreTipoLicencia()        Returns the current record's "nombre_tipo_licencia" value
  * @method string              getDescripcionTipoLicencia()   Returns the current record's "descripcion_tipo_licencia" value
  * @method Doctrine_Collection getConjuntoExamenes()          Returns the current record's "ConjuntoExamenes" collection
  * @method Doctrine_Collection getConjuntoRequisitos()        Returns the current record's "ConjuntoRequisitos" collection
+ * @method Doctrine_Collection getClaseAnterior()             Returns the current record's "ClaseAnterior" collection
+ * @method Doctrine_Collection getSolicitudLicencia()         Returns the current record's "SolicitudLicencia" collection
  * @method TipoLicencia        setIdTipoLicencia()            Sets the current record's "id_tipo_licencia" value
  * @method TipoLicencia        setNombreTipoLicencia()        Sets the current record's "nombre_tipo_licencia" value
  * @method TipoLicencia        setDescripcionTipoLicencia()   Sets the current record's "descripcion_tipo_licencia" value
  * @method TipoLicencia        setConjuntoExamenes()          Sets the current record's "ConjuntoExamenes" collection
  * @method TipoLicencia        setConjuntoRequisitos()        Sets the current record's "ConjuntoRequisitos" collection
+ * @method TipoLicencia        setClaseAnterior()             Sets the current record's "ClaseAnterior" collection
+ * @method TipoLicencia        setSolicitudLicencia()         Sets the current record's "SolicitudLicencia" collection
  * 
  * @package    agenda
  * @subpackage model
@@ -70,6 +76,14 @@ abstract class BaseTipoLicencia extends sfDoctrineRecord
              'foreign' => 'id_tipo_licencia'));
 
         $this->hasMany('ConjuntoRequisitos', array(
+             'local' => 'id_tipo_licencia',
+             'foreign' => 'id_tipo_licencia'));
+
+        $this->hasMany('ClaseAnterior', array(
+             'local' => 'id_tipo_licencia',
+             'foreign' => 'id_tipo_licencia'));
+
+        $this->hasMany('SolicitudLicencia', array(
              'local' => 'id_tipo_licencia',
              'foreign' => 'id_tipo_licencia'));
     }

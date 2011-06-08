@@ -12,17 +12,20 @@ Doctrine_Manager::getInstance()->bindComponent('Tramite', 'doctrine');
  * @property string $descripcion_tramite
  * @property Doctrine_Collection $ConjuntoExamenes
  * @property Doctrine_Collection $ConjuntoRequisitos
+ * @property Doctrine_Collection $SolicitudLicencia
  * 
  * @method integer             getIdTramite()           Returns the current record's "id_tramite" value
  * @method string              getNombreTramite()       Returns the current record's "nombre_tramite" value
  * @method string              getDescripcionTramite()  Returns the current record's "descripcion_tramite" value
  * @method Doctrine_Collection getConjuntoExamenes()    Returns the current record's "ConjuntoExamenes" collection
  * @method Doctrine_Collection getConjuntoRequisitos()  Returns the current record's "ConjuntoRequisitos" collection
+ * @method Doctrine_Collection getSolicitudLicencia()   Returns the current record's "SolicitudLicencia" collection
  * @method Tramite             setIdTramite()           Sets the current record's "id_tramite" value
  * @method Tramite             setNombreTramite()       Sets the current record's "nombre_tramite" value
  * @method Tramite             setDescripcionTramite()  Sets the current record's "descripcion_tramite" value
  * @method Tramite             setConjuntoExamenes()    Sets the current record's "ConjuntoExamenes" collection
  * @method Tramite             setConjuntoRequisitos()  Sets the current record's "ConjuntoRequisitos" collection
+ * @method Tramite             setSolicitudLicencia()   Sets the current record's "SolicitudLicencia" collection
  * 
  * @package    agenda
  * @subpackage model
@@ -70,6 +73,10 @@ abstract class BaseTramite extends sfDoctrineRecord
              'foreign' => 'id_tramite'));
 
         $this->hasMany('ConjuntoRequisitos', array(
+             'local' => 'id_tramite',
+             'foreign' => 'id_tramite'));
+
+        $this->hasMany('SolicitudLicencia', array(
              'local' => 'id_tramite',
              'foreign' => 'id_tramite'));
     }
