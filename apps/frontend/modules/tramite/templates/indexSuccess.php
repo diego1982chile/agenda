@@ -52,5 +52,31 @@
                   $('#examenes').html('');
               }
           });
+          
+          
+          
+          
+//    $('#prueba').each(function() {
+//        // Save current value of element
+//        $(this).data('oldVal', $(this));
+//        
+//        // Look for changes in the value
+//        $(this).bind("propertychange keyup input paste", function(event){
+//            // If value has changed...
+//            if ($(this).data('oldVal') != $(this).val()) {
+//                // Updated stored value
+//                $(this).data('oldVal', $(this).val());
+//                
+//                // Do action
+//                alert('asd');
+//                
+//            }
+//        });
+//    });
+          
+          
+          
+          
+          
       });
   </script>

@@ -22,6 +22,7 @@ class tramiteActions extends sfActions
     $this->tramiteselect = new TramiteSelectForm();
     $this->tipolicenciaselect = new TipoLicenciaSelectForm();
   }
+  
   public function executeCargar_requisitos(sfWebRequest $request)
   {
       $this->forwardUnless($id_licencia = $request->getParameter('id_licencia'), 'tramite', 'index');
