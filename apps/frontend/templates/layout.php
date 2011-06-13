@@ -17,7 +17,7 @@
   <body>
       <div id="main-container">
           <div id="header">
-            <a href="index.html" name="top" class="logo_link"></a>
+            <a href="<?php echo url_for('inicio/index') ?>" name="top" class="logo_link"></a>
           </div><!-- end #header -->
           
           <div id="menu_wrap">
@@ -27,30 +27,27 @@
             </li>
              <li>
                 <a href="<?php echo url_for('tramite/index') ?>">Tramites</a>
-                <ul>
+<!--                <ul>
                     <li><a href="404.html">Primera Licencia</a></li>
                     <li><a href="#">Renovación</a></li>
                     <li><a href="#">Duplicado</a></li>
                     <li><a href="#">Control</a></li>
                     <li><a href="#">Cambio Domicilio</a></li>
-                </ul>
+                </ul>-->
             </li>
             
             <li>
-                <a href="portfolio.html">Portfolio</a>
-                <ul>
+                <a href="<?php echo url_for('solicitud/new') ?>">Solicitud</a>
+<!--                <ul>
                     <li><a href="#">Web Design</a></li>
                     <li><a href="#">Prints</a></li>
                     <li><a href="#">Branding</a></li>
                     <li><a href="#">Photography</a></li>
                     <li><a href="#">Another Service</a></li>
-                </ul>
+                </ul>-->
             </li>
             <li>
-                <a href="blog.html">Blog</a>
-            </li>
-            <li>
-                <a href="contact.html">Contact</a>
+                <a href="#">Contacto</a>
             </li>
             
             

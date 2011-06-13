@@ -19,7 +19,24 @@ class solicitudActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
-    $this->form = new SolicitudLicenciaForm();
+    $this->forwardIf(!$this->getUser()->isAuthenticated(), 'solicitud', 'erroruser');
+    $solicitud = new SolicitudLicencia();
+    $solicitud->setRut($this->getUser()->getProfile()->getRut());
+    $solicitud->setFechaControl(date('d/m/Y'));
+    $solicitud->setUser($this->getUser()->getGuardUser());
+    
+    $nombre = $this->getUser()->getProfile()->getNombres();
+    $paterno = $this->getUser()->getProfile()->getApellidoPaterno();
+    $materno = $this->getUser()->getProfile()->getApellidoMaterno();
+    $this->form = new SolicitudLicenciaForm($solicitud,array(
+        'nombre' => $nombre, 
+        'paterno' => $paterno, 
+        'materno' => $materno
+        ));
+  }
+  public function executeErroruser(sfWebRequest $request)
+  {
+      $this->formsignin = new sfGuardFormSignin();
   }
 
   public function executeCreate(sfWebRequest $request)
@@ -27,8 +44,23 @@ class solicitudActions extends sfActions
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
     $this->form = new SolicitudLicenciaForm();
-
-    $this->processForm($request, $this->form);
+    
+    $values = $request->getParameter($this->form->getName());
+    $fecha1 = $values['fecha_ultimo_control'];
+    $fecha2 = $values['fecha_control'];
+    list($d1, $m1, $a1) = explode('/', $fecha1);
+    list($d2, $m2, $a2) = explode('/', $fecha2);
+    $values['fecha_ultimo_control'] = date('Y-m-d', mktime(0, 0, 0, $m1, $d1, $a1));
+    $values['fecha_control'] = date('Y-m-d', mktime(0, 0, 0, $m2, $d2, $a2));
+    
+    $this->form->bind($values, $request->getFiles($this->form->getName()));
+    
+    if ($this->form->isValid())
+    {
+      $solicitud_licencia = $this->form->save();
+      $this->getUser()->setFlash('notice', 'Su solicitud ha sido ingresada exitosamente');
+      $this->redirect('inicio/index');
+    }
 
     $this->setTemplate('new');
   }
@@ -62,7 +94,10 @@ class solicitudActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+    $values = $request->getParameter($form->getName());
+    
+    
+    $form->bind($values, $request->getFiles($form->getName()));
     if ($form->isValid())
     {
       $solicitud_licencia = $form->save();

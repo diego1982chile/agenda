@@ -18,7 +18,8 @@ class inicioActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
       $this->formsignin = new sfGuardFormSignin();
-//    $this->forward('default', 'module');
+//      $v = array('hola', 2);
+//      $this->v = json_encode($v);
   }
   
 }

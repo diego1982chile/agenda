@@ -189,6 +189,7 @@ sfGuardUserProfile:
     id:         { type: integer(5), primary: true, autoincrement: true }
     user_id:    { type: integer(5), notnull: true }
     nombres:    { type: string(100) }
+    rut:    { type: string(11) }
     apellido_paterno:      { type: string(40) }
     apellido_materno:      { type: string(40) }
     fecha_nacimiento:      { type: timestamp }

@@ -1,3 +1,4 @@
+<div class="clear"></div><!-- end .clear --> 
 <?php if (!$sf_user->isAuthenticated()) : ?> 
         <div id="content_wrap" class="content_bg_sidebar">
             <div class="corners_bottom_sidebar"></div><!-- end .corners_bottom_nosidebar -->

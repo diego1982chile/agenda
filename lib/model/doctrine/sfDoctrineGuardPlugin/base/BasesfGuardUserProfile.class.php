@@ -8,6 +8,7 @@
  * @property integer $id
  * @property integer $user_id
  * @property string $nombres
+ * @property string $rut
  * @property string $apellido_paterno
  * @property string $apellido_materno
  * @property timestamp $fecha_nacimiento
@@ -20,6 +21,7 @@
  * @method integer            getId()               Returns the current record's "id" value
  * @method integer            getUserId()           Returns the current record's "user_id" value
  * @method string             getNombres()          Returns the current record's "nombres" value
+ * @method string             getRut()              Returns the current record's "rut" value
  * @method string             getApellidoPaterno()  Returns the current record's "apellido_paterno" value
  * @method string             getApellidoMaterno()  Returns the current record's "apellido_materno" value
  * @method timestamp          getFechaNacimiento()  Returns the current record's "fecha_nacimiento" value
@@ -31,6 +33,7 @@
  * @method sfGuardUserProfile setId()               Sets the current record's "id" value
  * @method sfGuardUserProfile setUserId()           Sets the current record's "user_id" value
  * @method sfGuardUserProfile setNombres()          Sets the current record's "nombres" value
+ * @method sfGuardUserProfile setRut()              Sets the current record's "rut" value
  * @method sfGuardUserProfile setApellidoPaterno()  Sets the current record's "apellido_paterno" value
  * @method sfGuardUserProfile setApellidoMaterno()  Sets the current record's "apellido_materno" value
  * @method sfGuardUserProfile setFechaNacimiento()  Sets the current record's "fecha_nacimiento" value
@@ -64,6 +67,10 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
         $this->hasColumn('nombres', 'string', 100, array(
              'type' => 'string',
              'length' => 100,
+             ));
+        $this->hasColumn('rut', 'string', 11, array(
+             'type' => 'string',
+             'length' => 11,
              ));
         $this->hasColumn('apellido_paterno', 'string', 40, array(
              'type' => 'string',
