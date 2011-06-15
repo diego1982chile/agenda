@@ -12,6 +12,50 @@ class SolicitudLicenciaTable extends Doctrine_Table
      *
      * @return object SolicitudLicenciaTable
      */
+    
+    static public $comunas = array(
+        "cerrillos" => "Cerrillos",
+        "cerro navia" => "Cerro Navia",
+        "conchalí" => "Conchalí",
+        "el bosque" => "El Bosque",
+        "estación central" => "Estación Central",
+        "huechuraba" => "Huechuraba",
+        "independencia" => "Independencia",
+        "la cisterna" => "La Cisterna",
+        "la florida" => "La Florida",
+        "la granja" => "La Granja",
+        "la pintana" => "La Pintana",
+        "la reina" => "La Reina",
+        "las condes" => "Las Condes",
+        "lo barnechea" => "Lo Barnechea",
+        "lo espejo" => "Lo Espejo",
+        "lo prado" => "Lo Prado",
+        "macul" => "Macul",
+        "maipú" => "Maipú",
+        "ñuñoa" => "Ñuñoa",
+        "pedro aguirre cerda" => "Pedro Aguirre Cerda",
+        "peñalolén" => "Peñalolén",
+        "providencia" => "Providencia",
+        "pudahuel" => "Pudahuel",
+        "puente alto" => "Puente Alto",
+        "quilicura" => "Quilicura",
+        "quinta normal" => "Quinta Normal",
+        "recoleta" => "Recoleta",
+        "renca" => "Renca",
+        "san bernardo" => "San Bernardo",
+        "san joaquín" => "San Joaquín",
+        "san miguel" => "San Miguel",
+        "san ramón" => "San Ramón",
+        "santiago centro" => "Santiago Centro",
+        "vitacura" => "Vitacura",
+    );
+    
+    public function getComunas()
+    {
+        return self::$comunas;
+    }
+    
+    
     public static function getInstance()
     {
         return Doctrine_Core::getTable('SolicitudLicencia');

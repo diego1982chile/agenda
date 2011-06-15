@@ -1,0 +1,9 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+
+all:
+  stylesheets:    [smoothness/jquery-ui-1.8.13.custom.css]
+
+  javascripts:    [jquery-ui-1.8.13.custom.min.js]
+

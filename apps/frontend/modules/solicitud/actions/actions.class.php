@@ -19,17 +19,49 @@ class solicitudActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
+    $this->forwardIf(!$this->getUser()->isAuthenticated(), 'solicitud', 'erroruser');
+//    $this->getUser()->setCulture('es_CL');
+    
     $this->form = new SolicitudLicenciaForm();
+    
+    $nombre = $this->getUser()->getProfile()->getNombres();
+    $paterno = $this->getUser()->getProfile()->getApellidoPaterno();
+    $materno = $this->getUser()->getProfile()->getApellidoMaterno();
+    $this->form->setDefaults(array(
+        'user_id' => $this->getUser()->getGuardUser()->getId(),
+        'rut' => $this->getUser()->getProfile()->getRut(),
+        'nombre' => $nombre,
+        'paterno' => $paterno,
+        'materno' => $materno,    
+        'fecha_control' => date('d/m/Y', time() + 86400 * 10), 
+        'porta_licencia' => '0',    
+        'restriccion' => '0',    
+        'es_donante' => '1',    
+        ));
+  }
+  public function executeErroruser(sfWebRequest $request)
+  {
+      $this->formsignin = new sfGuardFormSignin();
   }
 
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
+//    $this->getUser()->setCulture('es_CL');
 
     $this->form = new SolicitudLicenciaForm();
-
-    $this->processForm($request, $this->form);
-
+    
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+    
+    
+    if ($this->form->isValid())
+    {
+        $this->form->getObject()->setEstado('1');
+        $solicitud_licencia = $this->form->save();
+        $this->getUser()->setFlash('notice', 'Su solicitud ha sido ingresada exitosamente');
+        $this->redirect('inicio/index');
+    }
+    
     $this->setTemplate('new');
   }
 
@@ -62,7 +94,10 @@ class solicitudActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+    $values = $request->getParameter($form->getName());
+    
+    
+    $form->bind($values, $request->getFiles($form->getName()));
     if ($form->isValid())
     {
       $solicitud_licencia = $form->save();
