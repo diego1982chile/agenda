@@ -22,17 +22,22 @@ class SolicitudLicenciaForm extends BaseSolicitudLicenciaForm {
         $this->validatorSchema['materno'] = new sfValidatorString(array('max_length' => 40, 'required' => true));
 
         $this->widgetSchema['fecha_control'] = new sfWidgetFormInputText(array(), array('readonly' => 'readonly'));
-        $this->validatorSchema['fecha_control'] = new sfValidatorDate(
-                        array('date_format' => '/(\d{2})\/(\d{2})\/(\d{4})/'),
-                        array(
-                            'required' => 'Requerido',
-                            'invalid' => 'Inválido',
-                            'bad_format' => 'La Fecha "%value%" debe tener formato dd/mm/aaaa'
+        $this->validatorSchema['fecha_control'] = new sfValidatorRegex(
+                array('pattern' => '/(\d{4})-(\d{2})-(\d{2})/'),
+                array('invalid' => 'Fecha invalida')
+                );
+        
+        
+        $this->widgetSchema['fecha_ultimo_control'] = new sfWidgetFormJQueryDate(array(
+              'image'=>'/images/calendar.png',
+              'config' => '{}',
+              'culture' => 'es',
+              'date_widget' => new sfWidgetFormDate(array(                        
+                        'format' => '%day%/%month%/%year%',
+                    ))
                 ));
-
-        $this->widgetSchema['fecha_ultimo_control'] = new sfWidgetFormInputText(array(), array());
         $this->validatorSchema['fecha_ultimo_control'] = new sfValidatorDate(
-                        array('date_format' => '/(\d{2})\/(\d{2})\/(\d{4})/'),
+                        array('date_format' => '/(?P<day>\d{2})/(?P<month>\d{2})/(?P<year>\d{4})/'),
                         array(
                             'required' => 'Requerido',
                             'invalid' => 'Inválido',
@@ -113,48 +118,23 @@ class SolicitudLicenciaForm extends BaseSolicitudLicenciaForm {
         ));
     }
     
-    public function bind(array $taintedValues = null, array $taintedFiles = null){        
-        $this->fechas['fecha_ultimo_control'] = $taintedValues['fecha_ultimo_control'];
+    public function bind(array $taintedValues = null, array $taintedFiles = null){
         $this->fechas['fecha_control'] = $taintedValues['fecha_control'];
-        
-        if (preg_match("/(\d{2})\/(\d{2})\/(\d{4})/", $taintedValues['fecha_ultimo_control'])) {
-            list($d1, $m1, $a1) = explode('/', $taintedValues['fecha_ultimo_control']);
-            $taintedValues['fecha_ultimo_control'] = date('Y-m-d', mktime(0, 0, 0, $m1, $d1, $a1));
-        }
 
         if (preg_match("/(\d{2})\/(\d{2})\/(\d{4})/", $taintedValues['fecha_control'])) {
             list($d1, $m1, $a1) = explode('/', $taintedValues['fecha_control']);
-            $taintedValues['fecha_control'] = date('Y-m-d', mktime(0, 0, 0, $m1, $d1, $a1));
+            $taintedValues['fecha_control'] = date('Y-m-d', mktime(0, 0, 0, $m1, $d1, $a1));            
         }
+        
         parent::bind($taintedValues, $taintedFiles);
     }
-    
+  
     public function isValid(){
-        if(!parent::isValid()){
-            $this->values['fecha_ultimo_control'] = $this->fechas['fecha_ultimo_control'];
-            $this->values['fecha_control'] = $this->fechas['fecha_control'];  
+        $valido = parent::isValid();
+        if(!$valido){
+            $this->taintedValues['fecha_control'] = $this->fechas['fecha_control'];  
         }
-        return parent::isValid();
-    }
-
-//    public function doSave($con = null) {
-//        //CAMBIAMOS LAS FECHAS A FORMATO MYSQL SI CORRESPONDE
-//        if (preg_match("/(\d{2})\/(\d{2})\/(\d{4})/", $this->values['fecha_ultimo_control'])) {
-//            list($d1, $m1, $a1) = explode('/', $this->values['fecha_ultimo_control']);
-//            $this->values['fecha_ultimo_control'] = date('Y-m-d', mktime(0, 0, 0, $m1, $d1, $a1));
-//            $this->values['estado'] = 'ultima si';
-//        }
-//        else $this->values['estado'] = 'ultima no'.$this->values['fecha_ultimo_control'];
-//        if (preg_match("/(\d{2})\/(\d{2})\/(\d{4})/", $this->values['fecha_control'])) {
-//            list($d1, $m1, $a1) = explode('/', $this->values['fecha_control']);
-//            $this->values['fecha_control'] = date('Y-m-d', mktime(0, 0, 0, $m1, $d1, $a1));
-//        }      
-//        
-//        parent::doSave($con);
-//    }
-    
-    public function valor($s){
-        return $this->values[$s];
+        return $valido;
     }
 
 }

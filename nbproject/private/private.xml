@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/media/ANtharez/NetBeansProjects/SF/agenda/apps/frontend/modules/solicitud/actions/actions.class.php</file>
+        <file>file:/media/ANtharez/NetBeansProjects/SF/agenda/lib/form/doctrine/SolicitudLicenciaForm.class.php</file>
+        <file>file:/media/ANtharez/NetBeansProjects/SF/agenda/lib/form/doctrine/base/BaseSolicitudLicenciaForm.class.php</file>
+        <file>file:/media/ANtharez/NetBeansProjects/SF/agenda/apps/frontend/modules/solicitud/config/view.yml</file>
+        <file>file:/media/ANtharez/NetBeansProjects/SF/agenda/apps/frontend/templates/_formlogin.php</file>
+    </open-files>
 </project-private>

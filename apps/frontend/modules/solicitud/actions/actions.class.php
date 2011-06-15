@@ -20,7 +20,7 @@ class solicitudActions extends sfActions
   public function executeNew(sfWebRequest $request)
   {
     $this->forwardIf(!$this->getUser()->isAuthenticated(), 'solicitud', 'erroruser');
-    $this->getUser()->setCulture('es_CL');
+//    $this->getUser()->setCulture('es_CL');
     
     $this->form = new SolicitudLicenciaForm();
     
@@ -33,7 +33,7 @@ class solicitudActions extends sfActions
         'nombre' => $nombre,
         'paterno' => $paterno,
         'materno' => $materno,    
-        'fecha_control' => date('d/m/Y'),    
+        'fecha_control' => date('d/m/Y', time() + 86400 * 10), 
         'porta_licencia' => '0',    
         'restriccion' => '0',    
         'es_donante' => '1',    
@@ -47,34 +47,21 @@ class solicitudActions extends sfActions
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
-    $this->getUser()->setCulture('es_CL');
+//    $this->getUser()->setCulture('es_CL');
 
     $this->form = new SolicitudLicenciaForm();
-    $values = $request->getParameter($this->form->getName());
-    $fecha1 = $values['fecha_ultimo_control'];
     
     $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
-       
-//    $fecha2 = $this->form->valor('fecha_ultimo_control');
     
     
     if ($this->form->isValid())
     {
-        //CAMBIAMOS LOS VALORES A FECHAS MYSQL
-//        $values = $request->getParameter($this->form->getName());
-//        $fecha1 = $values['fecha_ultimo_control'];
-//        $fecha2 = $values['fecha_control'];
-//        list($d1, $m1, $a1) = explode('/', $fecha1);
-//        list($d2, $m2, $a2) = explode('/', $fecha2);
-//        $this->form->getObject()->setFechaUltimoControl(date('Y-m-d', mktime(0, 0, 0, $m1, $d1, $a1)));
-//        $this->form->getObject()->setFechaControl(date('Y-m-d', mktime(0, 0, 0, $m2, $d2, $a2)));
-//        $this->form->getObject()->setEstado('1');
-        //GUARDAMOS
+        $this->form->getObject()->setEstado('1');
         $solicitud_licencia = $this->form->save();
-        $this->getUser()->setFlash('notice', 'Su solicitud ha sido ingresada exitosamente, '.$fecha1);
+        $this->getUser()->setFlash('notice', 'Su solicitud ha sido ingresada exitosamente');
         $this->redirect('inicio/index');
     }
-
+    
     $this->setTemplate('new');
   }
 
