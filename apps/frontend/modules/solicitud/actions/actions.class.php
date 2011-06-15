@@ -20,18 +20,23 @@ class solicitudActions extends sfActions
   public function executeNew(sfWebRequest $request)
   {
     $this->forwardIf(!$this->getUser()->isAuthenticated(), 'solicitud', 'erroruser');
-    $solicitud = new SolicitudLicencia();
-    $solicitud->setRut($this->getUser()->getProfile()->getRut());
-    $solicitud->setFechaControl(date('d/m/Y'));
-    $solicitud->setUser($this->getUser()->getGuardUser());
+    $this->getUser()->setCulture('es_CL');
+    
+    $this->form = new SolicitudLicenciaForm();
     
     $nombre = $this->getUser()->getProfile()->getNombres();
     $paterno = $this->getUser()->getProfile()->getApellidoPaterno();
     $materno = $this->getUser()->getProfile()->getApellidoMaterno();
-    $this->form = new SolicitudLicenciaForm($solicitud,array(
-        'nombre' => $nombre, 
-        'paterno' => $paterno, 
-        'materno' => $materno
+    $this->form->setDefaults(array(
+        'user_id' => $this->getUser()->getGuardUser()->getId(),
+        'rut' => $this->getUser()->getProfile()->getRut(),
+        'nombre' => $nombre,
+        'paterno' => $paterno,
+        'materno' => $materno,    
+        'fecha_control' => date('d/m/Y'),    
+        'porta_licencia' => '0',    
+        'restriccion' => '0',    
+        'es_donante' => '1',    
         ));
   }
   public function executeErroruser(sfWebRequest $request)
@@ -42,24 +47,32 @@ class solicitudActions extends sfActions
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
+    $this->getUser()->setCulture('es_CL');
 
     $this->form = new SolicitudLicenciaForm();
-    
     $values = $request->getParameter($this->form->getName());
     $fecha1 = $values['fecha_ultimo_control'];
-    $fecha2 = $values['fecha_control'];
-    list($d1, $m1, $a1) = explode('/', $fecha1);
-    list($d2, $m2, $a2) = explode('/', $fecha2);
-    $values['fecha_ultimo_control'] = date('Y-m-d', mktime(0, 0, 0, $m1, $d1, $a1));
-    $values['fecha_control'] = date('Y-m-d', mktime(0, 0, 0, $m2, $d2, $a2));
     
-    $this->form->bind($values, $request->getFiles($this->form->getName()));
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+       
+//    $fecha2 = $this->form->valor('fecha_ultimo_control');
+    
     
     if ($this->form->isValid())
     {
-      $solicitud_licencia = $this->form->save();
-      $this->getUser()->setFlash('notice', 'Su solicitud ha sido ingresada exitosamente');
-      $this->redirect('inicio/index');
+        //CAMBIAMOS LOS VALORES A FECHAS MYSQL
+//        $values = $request->getParameter($this->form->getName());
+//        $fecha1 = $values['fecha_ultimo_control'];
+//        $fecha2 = $values['fecha_control'];
+//        list($d1, $m1, $a1) = explode('/', $fecha1);
+//        list($d2, $m2, $a2) = explode('/', $fecha2);
+//        $this->form->getObject()->setFechaUltimoControl(date('Y-m-d', mktime(0, 0, 0, $m1, $d1, $a1)));
+//        $this->form->getObject()->setFechaControl(date('Y-m-d', mktime(0, 0, 0, $m2, $d2, $a2)));
+//        $this->form->getObject()->setEstado('1');
+        //GUARDAMOS
+        $solicitud_licencia = $this->form->save();
+        $this->getUser()->setFlash('notice', 'Su solicitud ha sido ingresada exitosamente, '.$fecha1);
+        $this->redirect('inicio/index');
     }
 
     $this->setTemplate('new');

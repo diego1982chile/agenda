@@ -12,4 +12,13 @@
  */
 class SolicitudLicencia extends BaseSolicitudLicencia
 {
+//    public function save(Doctrine_Connection $conn = null) {
+//        if ($this->isNew()) {
+////            $now = $this->getCreatedAt() ? $this->getDateTimeObject('created_at')->format('U') : time();
+////            $this->setExpiresAt(date('Y-m-d H:i:s', $now + 86400 * 30));
+//            return 'hola';
+//        }
+//
+//        return parent::save($conn);
+//    }
 }
