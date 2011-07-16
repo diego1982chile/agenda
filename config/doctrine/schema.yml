@@ -23,7 +23,32 @@ ClaseAnterior:
       local: id_solicitud
       foreign: id_solicitud
       type: one
-
+DiaNoLaboral:
+  connection: doctrine
+  tableName: dia_no_laboral
+  columns:
+    id_dia_no_laboral:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    user_id:
+      type: integer(5)
+      notnull: true
+    fecha_no_laboral:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    User:
+      class: sfGuardUser
+      foreign: id
+      local: user_id
+      type: one
 Hora:
   connection: doctrine
   tableName: hora
@@ -33,6 +58,7 @@ Hora:
       fixed: false
       unsigned: false
       primary: true
+      notnull: true
       autoincrement: true
     id_solicitud:
       type: integer(4)
@@ -46,14 +72,14 @@ Hora:
       fixed: false
       unsigned: false
       primary: false
-      notnull: false
+      notnull: true
       autoincrement: false
     hora_ini:
       type: time(25)
       fixed: false
       unsigned: false
       primary: false
-      notnull: false
+      notnull: true
       autoincrement: false
     tipo:
       type: string(20)
@@ -62,11 +88,6 @@ Hora:
       primary: false
       notnull: false
       autoincrement: false
-  relations:
-    SolicitudLicencia:
-      local: id_solicitud
-      foreign: id_solicitud
-      type: one
 Pago:
   connection: doctrine
   tableName: pago

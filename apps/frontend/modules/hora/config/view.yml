@@ -1,0 +1,9 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+
+all:
+  stylesheets:    [smoothness/jquery-ui-1.8.13.custom.css,jquery.booklet.1.2.0.css,miBooklet.css]
+
+  javascripts:    [jquery-ui-1.8.13.custom.min.js,jquery.easing.1.3.js,jquery.booklet.1.2.0.min.js,jquery.ui.datepicker-es.js]
+

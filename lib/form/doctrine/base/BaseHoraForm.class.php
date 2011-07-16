@@ -16,7 +16,7 @@ abstract class BaseHoraForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id_hora'      => new sfWidgetFormInputHidden(),
-      'id_solicitud' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('SolicitudLicencia'), 'add_empty' => true)),
+      'id_solicitud' => new sfWidgetFormInputText(),
       'fecha_hora'   => new sfWidgetFormDate(),
       'hora_ini'     => new sfWidgetFormTime(),
       'tipo'         => new sfWidgetFormInputText(),
@@ -24,9 +24,9 @@ abstract class BaseHoraForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id_hora'      => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id_hora')), 'empty_value' => $this->getObject()->get('id_hora'), 'required' => false)),
-      'id_solicitud' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('SolicitudLicencia'), 'required' => false)),
-      'fecha_hora'   => new sfValidatorDate(array('required' => false)),
-      'hora_ini'     => new sfValidatorTime(array('required' => false)),
+      'id_solicitud' => new sfValidatorInteger(array('required' => false)),
+      'fecha_hora'   => new sfValidatorDate(),
+      'hora_ini'     => new sfValidatorTime(),
       'tipo'         => new sfValidatorString(array('max_length' => 20, 'required' => false)),
     ));
 

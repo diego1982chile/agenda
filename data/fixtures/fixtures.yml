@@ -94,9 +94,10 @@ sfGuardUser:
     username:       admin
     password:       admin
     is_super_admin: true
-    Profile:
-      apellido_paterno: Oyarzun
-      apellido_materno: Rodriguez
+#    Profile:
+#      nombres:          Jonnatan
+#      apellido_paterno: Oyarzun
+#      apellido_materno: Rodriguez
     Groups:         [Group_admin]
   User_normal:
     first_name:     Diego
@@ -105,9 +106,9 @@ sfGuardUser:
     username:       diego
     password:       diego
     is_super_admin: false
-    Profile:
-      apellido_paterno: Soto
-      apellido_materno: Materno
+#    Profile:
+#      apellido_paterno: Soto
+#      apellido_materno: Materno
     Groups:         [Group_normal]
 
 sfGuardGroup:

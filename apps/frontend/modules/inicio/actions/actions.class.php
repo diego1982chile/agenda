@@ -21,5 +21,11 @@ class inicioActions extends sfActions
 //      $v = array('hola', 2);
 //      $this->v = json_encode($v);
   }
+  public function executeMail()
+  {
+      $this->getMailer()->composeAndSend('jonsxaero@gmail.com', 'jonsxaero@gmail.com', 'Subject', 'Body');
+      return $this->renderText('mail');
+  }
+
   
 }

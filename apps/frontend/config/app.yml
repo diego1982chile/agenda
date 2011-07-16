@@ -4,3 +4,20 @@
 # default values
 all:
   sf_guard_plugin_allow_login_with_email: false
+  recaptcha:
+    enabled: false
+    public_key:     6LduBcYSAAAAAMm9MDqqPvZNu8L01ADMp-gO-h3S
+    private_key:    6LduBcYSAAAAAFFqlSF8CuGkxO4lLtwKU6GHgfP3
+  sfForkedApply:
+    confirmation:
+      apply: false
+    mail_editable: false
+    from:
+      email: "jonsxaero@gmail.com"
+      fullname: "the staff at yoursite.com"
+  hora:
+    lim_horario_atencion:   17:00
+    inicio:                 08:00
+    modulos:                4
+    intervalo_horas:        1    
+    lim_fecha_atencion:     30

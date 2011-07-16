@@ -22,11 +22,27 @@ test:
   mailer:
     param:
       delivery_strategy: none
+#      transport:
+#        class: Swift_SmtpTransport
+#        param:
+#          host:       smtp.gmail.com
+#          port:       465
+#          encryption: tls
+#          username:   jonsxaero
+#          password:   ~
 
 dev:
   mailer:
     param:
       delivery_strategy: none
+      transport:
+        class: Swift_SmtpTransport
+        param:
+          host:       smtp.gmail.com
+          port:       465
+          encryption: ssl
+          username:   jonsxaero@gmail.com
+          password:   ~
 
 all:
   routing:

@@ -13,14 +13,14 @@ abstract class BaseHoraFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id_solicitud' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('SolicitudLicencia'), 'add_empty' => true)),
-      'fecha_hora'   => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
-      'hora_ini'     => new sfWidgetFormFilterInput(),
+      'id_solicitud' => new sfWidgetFormFilterInput(),
+      'fecha_hora'   => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'hora_ini'     => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'tipo'         => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
-      'id_solicitud' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('SolicitudLicencia'), 'column' => 'id_solicitud')),
+      'id_solicitud' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'fecha_hora'   => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
       'hora_ini'     => new sfValidatorPass(array('required' => false)),
       'tipo'         => new sfValidatorPass(array('required' => false)),
@@ -44,7 +44,7 @@ abstract class BaseHoraFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id_hora'      => 'Number',
-      'id_solicitud' => 'ForeignKey',
+      'id_solicitud' => 'Number',
       'fecha_hora'   => 'Date',
       'hora_ini'     => 'Text',
       'tipo'         => 'Text',

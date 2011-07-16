@@ -12,20 +12,20 @@ Doctrine_Manager::getInstance()->bindComponent('Hora', 'doctrine');
  * @property date $fecha_hora
  * @property time $hora_ini
  * @property string $tipo
- * @property SolicitudLicencia $SolicitudLicencia
+ * @property Doctrine_Collection $SolicitudLicencia
  * 
- * @method integer           getIdHora()            Returns the current record's "id_hora" value
- * @method integer           getIdSolicitud()       Returns the current record's "id_solicitud" value
- * @method date              getFechaHora()         Returns the current record's "fecha_hora" value
- * @method time              getHoraIni()           Returns the current record's "hora_ini" value
- * @method string            getTipo()              Returns the current record's "tipo" value
- * @method SolicitudLicencia getSolicitudLicencia() Returns the current record's "SolicitudLicencia" value
- * @method Hora              setIdHora()            Sets the current record's "id_hora" value
- * @method Hora              setIdSolicitud()       Sets the current record's "id_solicitud" value
- * @method Hora              setFechaHora()         Sets the current record's "fecha_hora" value
- * @method Hora              setHoraIni()           Sets the current record's "hora_ini" value
- * @method Hora              setTipo()              Sets the current record's "tipo" value
- * @method Hora              setSolicitudLicencia() Sets the current record's "SolicitudLicencia" value
+ * @method integer             getIdHora()            Returns the current record's "id_hora" value
+ * @method integer             getIdSolicitud()       Returns the current record's "id_solicitud" value
+ * @method date                getFechaHora()         Returns the current record's "fecha_hora" value
+ * @method time                getHoraIni()           Returns the current record's "hora_ini" value
+ * @method string              getTipo()              Returns the current record's "tipo" value
+ * @method Doctrine_Collection getSolicitudLicencia() Returns the current record's "SolicitudLicencia" collection
+ * @method Hora                setIdHora()            Sets the current record's "id_hora" value
+ * @method Hora                setIdSolicitud()       Sets the current record's "id_solicitud" value
+ * @method Hora                setFechaHora()         Sets the current record's "fecha_hora" value
+ * @method Hora                setHoraIni()           Sets the current record's "hora_ini" value
+ * @method Hora                setTipo()              Sets the current record's "tipo" value
+ * @method Hora                setSolicitudLicencia() Sets the current record's "SolicitudLicencia" collection
  * 
  * @package    agenda
  * @subpackage model
@@ -59,7 +59,7 @@ abstract class BaseHora extends sfDoctrineRecord
              'fixed' => 0,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => false,
+             'notnull' => true,
              'autoincrement' => false,
              'length' => 25,
              ));
@@ -68,7 +68,7 @@ abstract class BaseHora extends sfDoctrineRecord
              'fixed' => 0,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => false,
+             'notnull' => true,
              'autoincrement' => false,
              'length' => 25,
              ));
@@ -86,8 +86,8 @@ abstract class BaseHora extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('SolicitudLicencia', array(
-             'local' => 'id_solicitud',
-             'foreign' => 'id_solicitud'));
+        $this->hasMany('SolicitudLicencia', array(
+             'local' => 'id_hora',
+             'foreign' => 'id_hora'));
     }
 }
