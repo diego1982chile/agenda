@@ -22,7 +22,7 @@ class horaActions extends sfActions
   
   public function executePaso2(sfWebRequest $request)
   {
-      // Setear disponibilidad 
+    // Setear disponibilidad 
     // Verificar hora
     $this->formsignin = new sfGuardFormSignin();
     date_default_timezone_set('America/Santiago');        
@@ -93,12 +93,13 @@ class horaActions extends sfActions
     ->addGroupBy('fecha_hora')
     ->execute();         
     
-    $this->dias_no_disponibles2= array();
+    $this->dias_no_disponibles2= array();        
     
     foreach ($this->horas_dias as $dia):
     // Si el número de solicitudes iguala o excede el numero de modulos disponibles, insertar el dia
         if($dia->cantidad>=sfConfig::get('app_hora_modulos'))
         {
+            echo $dia->fecha_hora."<br>";
             array_push($this->dias_no_disponibles2,date('d-m-Y',strtotime($dia->fecha_hora)));
             // Si el día activo coincide con un dia copado, el calendario pasa al siguiente dia, 
             // y la hora activa a la primera hora de atención del dia siguiente            
@@ -109,6 +110,7 @@ class horaActions extends sfActions
             }
         }
     endforeach;      
+       
     
     // Dar formato de fecha compatible con datepicker y codificar a json
     $this->dias_no_disponibles2= json_encode($this->dias_no_disponibles2);                   
@@ -175,5 +177,82 @@ class horaActions extends sfActions
     $this->num_modulos=sfConfig::get('app_hora_modulos');                                      
     $this->indice =0;
   }
-  
+
+  public function executeTomar_hora(sfWebRequest $request)
+  {         
+    $this->forwardUnless($hora_tomada = $request->getParameter('hora'), 'hora', '1');                
+    $this->forwardUnless($dia = $request->getParameter('dia'), 'hora', '2');                
+    $this->forwardUnless($dia_activo = $request->getParameter('dia_activo'), 'hora', '3');
+    $this->forwardUnless($fecha_limite = $request->getParameter('fecha_limite'), 'hora', '4');
+    //$this->forwardUnless($indice = $request->getParameter('indice'), 'hora', '5');    
+    $indice = $request->getParameter('indice');
+        
+    $this->dia_activo=$dia_activo;
+    $this->fecha_limite=$fecha_limite;
+    $this->inicio =sfConfig::get('app_hora_inicio');                  
+    $this->intervalo=sfConfig::get('app_hora_intervalo_horas');  
+    $this->num_modulos=sfConfig::get('app_hora_modulos');                                      
+    $this->indice=$indice;                                      
+    
+    $this->dia_activo= str_replace('/', '-',$this->dia_activo);
+    $this->fecha_limite= str_replace('/', '-',$this->fecha_limite);    
+    //return $this->renderText("HOLA");
+    // Insertar la hora en la BD    
+    
+    $hora = new Hora();
+    $hora->setHoraIni($hora_tomada);    
+    $hora->setFechaHora(date('Y-m-d',strtotime($dia)));
+    $hora->setTipo(0);    
+    $hora->save();           
+    
+    // Construir modulos disponibles en base a las horas tomadas para el rango de fechas actual
+    
+    $this->horas = Doctrine_Core::getTable('Hora')
+    ->createQuery('a')      
+    ->where('fecha_hora>=?',date('Y-m-d',strtotime($this->dia_activo)))
+    ->andWhere('fecha_hora <=?',date('Y-m-d',strtotime($this->fecha_limite)))
+    ->orderBy('fecha_hora')                    
+    ->execute();
+    
+    $this->horas_tomadas= array();                   
+    
+    foreach ($this->horas as $hora):    
+        array_push($this->horas_tomadas,$hora);                        
+    endforeach;        
+    
+    $cont_horas=0;
+    //$this->matriz= array(''=>array());
+    $this->matriz= array();
+    $cantidad_horas=count($this->horas_tomadas);    
+    
+    while($cont_horas<$cantidad_horas)
+    {
+        $dia_actual=$this->horas_tomadas[$cont_horas]->fecha_hora;                
+        $dia_sig=$dia_actual;
+        $horas_pedidas= array();                
+        
+            // Obtiene las horas pedidas para el dia actual
+            while($dia_sig==$dia_actual):
+                array_push($horas_pedidas,$this->horas_tomadas[$cont_horas]->hora_ini);            
+                $cont_horas++;            
+                if($cont_horas<$cantidad_horas)
+                {                
+                    $dia_sig=$this->horas_tomadas[$cont_horas]->fecha_hora;
+                }
+                else
+                {
+                    break;
+                }            
+            endwhile;
+
+        $this->matriz[$dia_actual]=$horas_pedidas;
+    }                         
+    
+    return $this->renderPartial('hora/modulos', array('matriz' => $this->matriz,
+                                                      'dia_activo' => $this->dia_activo, 
+                                                      'inicio' => $this->inicio, 
+                                                      'fecha_limite' => $this->fecha_limite,
+                                                      'num_modulos' => $this->num_modulos,
+                                                      'indice' => $this->indice));
+   }    
 }
