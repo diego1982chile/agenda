@@ -48,8 +48,11 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
         $this->widgetSchema->moveField( 'email2', sfWidgetFormSchema::AFTER, 'email' );
 
         //Firstname and lastname
-        $this->setWidget( 'firstname', new sfWidgetFormInputText( array(), array( 'maxlength' => 30 ) ) );
-        $this->setWidget( 'lastname', new sfWidgetFormInputText( array(), array( 'maxlength' => 70 ) ) );
+        $this->setWidget( 'nombres', new sfWidgetFormInputText( array(), array( 'maxlength' => 30 ) ) );
+        $this->setWidget( 'apellido_paterno', new sfWidgetFormInputText( array(), array( 'maxlength' => 70 ) ) );
+        $this->setWidget( 'apellido_materno', new sfWidgetFormInputText( array(), array( 'maxlength' => 70 ) ) );
+//        $this->setWidget( 'firstname', new sfWidgetFormInputText( array(), array( 'maxlength' => 30 ) ) );
+//        $this->setWidget( 'lastname', new sfWidgetFormInputText( array(), array( 'maxlength' => 70 ) ) );
 
         $this->widgetSchema->setLabels( array(
             'username' => 'Username',
@@ -57,8 +60,12 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
             'password2' => 'Confirm password',
             'email' => 'Email address',
             'email2' => 'Confirm email',
-            'firstname' => 'First Name',
-            'lastname' => 'Last name'
+            'nombres' => 'Nombres',
+            'apellido_paterno' => 'Apellido Paterno',
+            'apellido_materno' => 'Apellido Materno',
+            
+//            'firstname' => 'First Name',
+//            'lastname' => 'Last name'
         ) );
 
         $this->widgetSchema->setNameFormat('sfApplyApply[%s]');
@@ -91,9 +98,12 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
                 array( 'required' => true, 'trim' => true )));
 
         
-        $this->setValidator('firstname', new sfValidatorApplyFirstname() );
-        
-        $this->setValidator('lastname', new sfValidatorApplyLastname() );
+//        $this->setValidator('firstname', new sfValidatorApplyFirstname() );
+        $this->setValidator('nombres', new sfValidatorApplyFirstname() );
+        $this->setValidator('apellido_paterno', new sfValidatorApplyLastname() );
+        $this->setValidator('apellido_materno', new sfValidatorApplyLastname() );
+//        
+//        $this->setValidator('lastname', new sfValidatorApplyLastname() );
 
         $schema = $this->validatorSchema;
 

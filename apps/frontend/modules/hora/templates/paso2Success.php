@@ -68,7 +68,7 @@
               var fechaInicial= convertFecha(min.toString());                     
               indice= (Date.parse(fechaSeleccionada)-Date.parse(fechaInicial))/(24*60*60*1000);                                            
               //alert("INDICE="+indice);
-              $('#modulos1').load('inicio/tomar_hora',{hora: hora, 
+              $('#modulos1').load(<?php echo url_for('hora/tomar_hora') ?>,{hora: hora, 
                                                        dia: dia, 
                                                        dia_activo: min, 
                                                        fecha_limite: max,

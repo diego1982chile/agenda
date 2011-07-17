@@ -53,8 +53,8 @@ sfGuardGroupPermission:
 sfGuardUser:
   actAs: [Timestampable]
   columns:
-    first_name: string(255)
-    last_name: string(255)
+#    first_name: string(255)
+#    last_name: string(255)
     email_address:
       type: string(255)
       notnull: true

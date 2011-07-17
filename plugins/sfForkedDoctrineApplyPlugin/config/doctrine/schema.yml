@@ -9,12 +9,12 @@ sfGuardUserProfile:
     email_new:
       type: string(255)
       unique: true
-    firstname:
-      type: string(255)
-    lastname:
-      type: string(255)
-#    nombres:
-#      type: string(100)
+    nombres:
+      type: string(32)
+    apellido_paterno:
+      type: string(70)
+    apellido_materno:
+      type: string(70)
 #    rut:
 #      type: string(11)
 #    fecha_nacimiento:

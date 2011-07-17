@@ -18,14 +18,11 @@ class inicioActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
       $this->formsignin = new sfGuardFormSignin();
-//      $v = array('hola', 2);
-//      $this->v = json_encode($v);
   }
-  public function executeMail()
+  public function executeMail(sfWebRequest $request)
   {
       $this->getMailer()->composeAndSend('jonsxaero@gmail.com', 'jonsxaero@gmail.com', 'Subject', 'Body');
       return $this->renderText('mail');
   }
-
   
 }
