@@ -1,4 +1,4 @@
-<div id="booklet" style="width: 50%;float:right">                                                                       
+<div id="booklet">                                                                       
 <div class="b-load">  
 <?php                     
 $cont_dias= $dia_activo;
@@ -16,7 +16,7 @@ while(date('Y-m-d',strtotime($cont_dias)) < date('Y-m-d',strtotime($fecha_limite
 $cont_horas=0;    
 $hora=$inicio;
 ?>
-<div style=" width: 100%; height: 100%">                                    
+<div>                                    
 <h6>   
 <?php echo $cont_dias."<br><br>";                                                                       
 $key= date('Y-m-d',strtotime($cont_dias));
@@ -79,7 +79,7 @@ $('#booklet').booklet({
                width:              320,
                height:             200,
                hovers:            false,
-               speed:              500,
+               speed:              800,
                pageNumbers:        false,
                shadows:            true,
                // display shadows on page animations
