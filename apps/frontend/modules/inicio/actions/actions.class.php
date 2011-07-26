@@ -23,6 +23,5 @@ class inicioActions extends sfActions
   {
       $this->getMailer()->composeAndSend('jonsxaero@gmail.com', 'jonsxaero@gmail.com', 'Subject', 'Body');
       return $this->renderText('mail');
-  }
-  
+  } 
 }
