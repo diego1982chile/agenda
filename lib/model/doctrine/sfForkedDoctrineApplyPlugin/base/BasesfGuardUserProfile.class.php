@@ -10,6 +10,7 @@
  * @property string $nombres
  * @property string $apellido_paterno
  * @property string $apellido_materno
+ * @property string $rut
  * @property timestamp $validate_at
  * @property string $validate
  * @property sfGuardUser $User
@@ -19,6 +20,7 @@
  * @method string             getNombres()          Returns the current record's "nombres" value
  * @method string             getApellidoPaterno()  Returns the current record's "apellido_paterno" value
  * @method string             getApellidoMaterno()  Returns the current record's "apellido_materno" value
+ * @method string             getRut()              Returns the current record's "rut" value
  * @method timestamp          getValidateAt()       Returns the current record's "validate_at" value
  * @method string             getValidate()         Returns the current record's "validate" value
  * @method sfGuardUser        getUser()             Returns the current record's "User" value
@@ -27,6 +29,7 @@
  * @method sfGuardUserProfile setNombres()          Sets the current record's "nombres" value
  * @method sfGuardUserProfile setApellidoPaterno()  Sets the current record's "apellido_paterno" value
  * @method sfGuardUserProfile setApellidoMaterno()  Sets the current record's "apellido_materno" value
+ * @method sfGuardUserProfile setRut()              Sets the current record's "rut" value
  * @method sfGuardUserProfile setValidateAt()       Sets the current record's "validate_at" value
  * @method sfGuardUserProfile setValidate()         Sets the current record's "validate" value
  * @method sfGuardUserProfile setUser()             Sets the current record's "User" value
@@ -62,6 +65,10 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
         $this->hasColumn('apellido_materno', 'string', 70, array(
              'type' => 'string',
              'length' => 70,
+             ));
+        $this->hasColumn('rut', 'string', 11, array(
+             'type' => 'string',
+             'length' => 11,
              ));
         $this->hasColumn('validate_at', 'timestamp', null, array(
              'type' => 'timestamp',

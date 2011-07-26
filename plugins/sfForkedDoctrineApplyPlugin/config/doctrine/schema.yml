@@ -15,8 +15,8 @@ sfGuardUserProfile:
       type: string(70)
     apellido_materno:
       type: string(70)
-#    rut:
-#      type: string(11)
+    rut:
+      type: string(11)
 #    fecha_nacimiento:
 #      type: timestamp
 #    direccion:

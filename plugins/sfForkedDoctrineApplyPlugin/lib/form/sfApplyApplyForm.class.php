@@ -99,9 +99,18 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
 
         
 //        $this->setValidator('firstname', new sfValidatorApplyFirstname() );
-        $this->setValidator('nombres', new sfValidatorApplyFirstname() );
-        $this->setValidator('apellido_paterno', new sfValidatorApplyLastname() );
-        $this->setValidator('apellido_materno', new sfValidatorApplyLastname() );
+        $this->validatorSchema['nombres'] = new sfValidatorAnd(array(
+            $this->validatorSchema['nombres'],
+            new sfValidatorApplyFirstname()
+            ));
+        $this->validatorSchema['apellido_paterno'] = new sfValidatorAnd(array(
+            $this->validatorSchema['apellido_paterno'],
+            new sfValidatorApplyLastname()
+            ));
+        $this->validatorSchema['apellido_materno'] = new sfValidatorAnd(array(
+            $this->validatorSchema['apellido_materno'],
+            new sfValidatorApplyLastname()
+            ));
 //        
 //        $this->setValidator('lastname', new sfValidatorApplyLastname() );
 
