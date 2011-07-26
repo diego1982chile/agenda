@@ -124,13 +124,6 @@ Pago:
       local: id_solicitud
       foreign: id_solicitud
       type: one
-
-
-
-
-
-
-
 SolicitudLicencia:
   connection: doctrine
   tableName: solicitud_licencia
@@ -261,11 +254,6 @@ SolicitudLicencia:
       local: id_solicitud
       foreign: id_solicitud
       type: many
-      
-      
-      
-      
-      
 ConjuntoExamenes:
   connection: doctrine
   tableName: conjunto_examenes
@@ -365,6 +353,65 @@ Examen:
       local: id_examen
       foreign: id_examen
       type: many
+ParametroHora:
+  connection: doctrine
+  tableName: parametro_hora
+  columns:
+    id_parametro_hora:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    iniciojornada_parametro_hora:
+      type: time(25)
+      fixed: true
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    finaljornada_parametro_hora:
+      type: time(25)
+      fixed: true
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    inicioatencion_parametro_hora:
+      type: time(25)
+      fixed: true
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    finalatencion_parametro_hora:
+      type: time(25)
+      fixed: true
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    cantidadmodulo_parametro_hora:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    periodoatencion_parametro_hora:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    ventanadisponibilidad_parametro_hora:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
 Requisito:
   connection: doctrine
   tableName: requisito

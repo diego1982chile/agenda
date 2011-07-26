@@ -27,10 +27,3 @@
             <div class="clear"></div>
         </div>
 
-<!--        <script type="text/javascript">
-            var data = $.parseJSON('<?php //echo $sf_data->getRaw('v') ?>');
-
-            alert(data[1]);
-            
-        </script>-->
-
