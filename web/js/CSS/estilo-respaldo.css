@@ -1,0 +1,350 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+BODY {
+	font : 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color : #666666;
+	text-align: center;
+	vertical-align: baseline;
+	display: table;
+	height: 100%;
+	width: 100%;
+	margin-top: 20px;
+	margin-right: 0px;
+	margin-bottom: 20px;
+	margin-left: 0px;
+}
+
+#mas{
+	height : 30px;
+	width: 30px;
+}
+
+#centrar{
+	 margin:0 auto 0 auto; 
+	 width:440px; 
+}
+#centrar_consulta{
+	 margin:0 auto 0 auto; 
+	 width:200px; 
+}
+#centrar_supervisor{
+	 margin:0 auto 0 auto; 
+	 width:350px; 
+}
+#contenedor{
+text-align: left;
+background-color : #ffffff;
+display: table; 
+width: 1000px;
+margin-left: auto; 
+margin-right: auto;
+} 
+
+#cabecera{
+backgroung : #d0cafa;
+height : 106px;
+width: 700px;
+margin: auto;
+} 
+
+#formulario{
+width:auto;
+height:auto;
+} 
+.color {
+	background-color: #CCCCCC;
+}
+.fuera {
+	background-color:#900;
+}
+.editar{
+	height: 15px;
+	width: 15px;
+	border: none;
+	background: none;
+}
+.correo{
+text-decoration:none;	
+color: #000;
+}
+
+#googleads{
+
+margin: 3px auto;
+
+display:block;
+
+clear : both;
+
+width: 468px;
+
+height: 60px;
+}
+
+table {
+	border:none;
+	font-weight: bold;
+	font-size:9px;
+}
+
+.consulta_tablas {
+	color:#FFFFFF;
+	background:#000000;
+	font-size:9px;
+	text-align:right;
+}
+
+.consulta_tablas2 {
+	color:#000;
+	background:#CCC;
+	font-size:9px;
+	text-align:left;
+}
+
+.inserta_tablas1 {
+	font-size:9px;
+	text-align:right;
+}
+
+.inserta_tablas2
+{
+	font-size:9px;
+	text-align:left;
+}
+.color1 {
+	background-color:#999;
+}
+.style1 {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+
+select {
+	width:180px;
+}
+
+.rif{
+	width:35px;
+}
+
+.rif2{
+	width:63px;
+}
+
+.imagen{
+	width:700px; 
+	height:106px;
+}
+#navegador{
+	background : #F5F4C3 url(../Imagenes/fondonav.gif);
+	padding : 3px 10px 5px 10px;
+	border-top : 1px solid #cccccc;
+	border-bottom : 1px solid #cccccc;
+	text-align: center;
+} 
+#boton{
+	width:100px;
+}
+
+#login{
+	padding : 3px 10px 5px 10px;
+	clear : both;
+	text-align: right;
+} 
+
+A.enlacenav, A.enlacenav:VISITED, A.enlacenav:ACTIVE, A.enlacenav:FOCUS, A.enlacenav:LINK{
+color: #494E6B;
+text-decoration:none;
+}
+
+
+A.enlacenav:HOVER{
+color: #3F7DE3;
+text-decoration:none;
+}
+
+.sindec
+{
+	text-decoration:none;color:white;
+}
+
+#cuerpo{
+width:480px;
+margin-right: 8px;
+padding: 12px 0px 10px 0px;
+background-color : #ffffff;
+float:right;
+} 
+
+h1{
+font-size: 12pt;
+text-align:center;
+} 
+
+
+
+p{
+	font-size: 8pt;
+	color: #999;
+} 
+
+#navabajo{
+	font-weight : bold;
+	text-align: center;
+	clear:both;
+} 
+
+#lateral{
+width: 200px;
+background-color: #EBF2FE;
+border-bottom : 1px solid #cccccc;
+border-right : 1px solid #cccccc;
+float:left;
+} 
+
+h2{
+background-color:#68729E;
+color:#ffffff;
+font-size:8pt;
+text-transform : uppercase;
+padding: 7px 3px 7px 8px;
+font-weight : normal;
+letter-spacing : 2px;
+margin: 0px 0px 8px 0px;
+text-align:center;
+}
+
+h4{
+	color:#F00;
+	font-weight: bold;
+}
+	
+h3{
+background-color:#000000;
+color: #ffffff;
+font-size:8pt;
+text-transform : uppercase;
+font-weight : bold;
+letter-spacing : 2px;
+text-align:center;	
+height:30px;
+}
+td{
+	color:#000000;
+	text-align: left;
+}
+.cuerpolateral{
+padding: 5px 4px 13px 10px;
+} 
+
+INPUT {
+	font-size : 8pt;
+	text-align: left;
+} 
+
+#fbuscar form{
+margin-bottom : 0px;
+margin-top : 0px;
+} 
+
+#campotexto{
+float: left;
+} 
+
+#campotexto input{
+width:100px;
+} 
+
+#botonbuscar {
+padding-top : 3px;
+padding-left: 106px;
+}
+
+#botonbuscar input{
+border : 0px none;
+} 
+
+.radio{
+clear:both;
+} 
+
+#otras ul{
+margin : 5px 10px 0px 0px;
+padding: 0px 0px 0px 4px;
+list-style: none;
+} 
+
+#otras li{
+	padding-left: 14px;
+	background: transparent url("../Imagenes/bullet.gif") 0 2px no-repeat;
+	margin-bottom: 10px;
+	font-weight: bold;
+} 
+
+#pie{
+	clear : both;
+	color : #cccccc;
+	text-align : center;
+	margin : 10px 10px 0px 10px;
+	padding-bottom:10px;
+} 
+
+#contenedor{
+text-align: left;
+border: 2px solid #cccccc;
+width: 700px;
+margin: auto;
+background-color : #ffffff;
+} 
+
+.ds_box {
+	background-color: #FFF;
+	border: 1px solid #000;
+	position: absolute;
+	z-index: 32767;
+}
+
+.ds_tbl {
+	background-color: #FFF;
+}
+
+.ds_head {
+	background-color: #333;
+	color: #FFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+.ds_subhead {
+	background-color: #CCC;
+	color: #000;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	width: 32px;
+}
+
+.ds_cell {
+	background-color: #EEE;
+	color: #000;
+	font-size: 13px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.ds_cell:hover {
+	background-color: #F3F3F3;
+} /* This hover code won't work for IE */
+#tablas {
+	color: #FFF;
+}
+

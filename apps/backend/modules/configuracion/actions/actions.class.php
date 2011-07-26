@@ -1,14 +1,14 @@
 <?php
 
 /**
- * hora actions.
+ * configuracion actions.
  *
  * @package    agenda
- * @subpackage hora
+ * @subpackage configuracion
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class horaActions extends sfActions
+class configuracionActions extends sfActions
 {
  /**
   * Executes index action
@@ -16,11 +16,6 @@ class horaActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request)
-  {
-    $this->forward('default', 'module');
-  }
-  
-  public function executePaso2(sfWebRequest $request)
   {
     // Setear disponibilidad 
     // Verificar hora
@@ -30,7 +25,7 @@ class horaActions extends sfActions
     $this->dia_activo=date('d-m-Y'); // dia actual --> Candidato a dia activo
     $this->fecha_limite=date('d-m-Y',strtotime($this->dia_activo."+".sfConfig::get('app_hora_lim_fecha_atencion')." days"));
     $this->hora_activa=date('H:i');  // Hora actual --> candidata a hora activa              
-          
+              
     // Obtener días no laborales
     
     $this->dias_no_laborales = Doctrine_Core::getTable('DiaNoLaboral')
@@ -175,84 +170,37 @@ class horaActions extends sfActions
     $this->inicio =sfConfig::get('app_hora_inicio');                  
     $this->intervalo=sfConfig::get('app_hora_intervalo_horas');
     $this->num_modulos=sfConfig::get('app_hora_modulos');                                      
-    $this->indice =0;
+    $this->indice =0;    
   }
-
-  public function executeTomar_hora(sfWebRequest $request)
-  {         
-    $this->forwardUnless($hora_tomada = $request->getParameter('hora'), 'hora', '1');                
-    $this->forwardUnless($dia = $request->getParameter('dia'), 'hora', '2');                
-    $this->forwardUnless($dia_activo = $request->getParameter('dia_activo'), 'hora', '3');
-    $this->forwardUnless($fecha_limite = $request->getParameter('fecha_limite'), 'hora', '4');
-    //$this->forwardUnless($indice = $request->getParameter('indice'), 'hora', '5');    
-    $indice = $request->getParameter('indice');
+  
+  public function executeGuardar_parametros(sfWebRequest $request)
+  {
+    
+    $this->forwardUnless($inicio = $request->getParameter('inicio'), 'inicio', '1');                
+    $this->forwardUnless($modulos = $request->getParameter('modulos'), 'modulos', '2');                
+    $this->forwardUnless($intervalo_horas = $request->getParameter('intervalo_horas'), 'intervalo_horas', '3');
+    $this->forwardUnless($lim_fecha_atencion = $request->getParameter('lim_fecha_atencion'), 'lim_fecha_atencion', '4');
+    /*
+    $inicio =sfConfig::get('app_hora_inicio');                  
+    $intervalo=sfConfig::get('app_hora_intervalo_horas');  
+    $num_modulos=sfConfig::get('app_hora_modulos');   
+    */
+    echo "INICIO=".$inicio."<br>";
+    echo "INTERVALO=".$intervalo_horas."<br>";
+    echo "NUM_MODULOS=".$modulos."<br>";
+                  
+    sfConfig::set('app_hora_inicio',$inicio);                  
+    sfConfig::set('app_hora_intervalo_horas',$intervalo_horas);      
+    sfConfig::set('app_hora_modulos',$modulos);
+    sfConfig::set('app_hora_lim_fecha_atencion',$lim_fecha_atencion);            
         
-    $this->dia_activo=$dia_activo;
-    $this->fecha_limite=$fecha_limite;
-    $this->inicio =sfConfig::get('app_hora_inicio');                  
-    $this->intervalo=sfConfig::get('app_hora_intervalo_horas');  
-    $this->num_modulos=sfConfig::get('app_hora_modulos');                                      
-    $this->indice=$indice;                                      
     
-    $this->dia_activo= str_replace('/', '-',$this->dia_activo);
-    $this->fecha_limite= str_replace('/', '-',$this->fecha_limite);    
-    //return $this->renderText("HOLA");
-    // Insertar la hora en la BD    
+    //$this->inicio =sfConfig::get('app_hora_inicio');                  
+    //$this->intervalo=sfConfig::get('app_hora_intervalo_horas');  
+    //$this->num_modulos=sfConfig::get('app_hora_modulos');   
     
-    $hora = new Hora();
-    $hora->setHoraIni($hora_tomada);    
-    $hora->setFechaHora(date('Y-m-d',strtotime($dia)));
-    $hora->setTipo(0);    
-    $hora->save();           
     
-    // Construir modulos disponibles en base a las horas tomadas para el rango de fechas actual
-    
-    $this->horas = Doctrine_Core::getTable('Hora')
-    ->createQuery('a')      
-    ->where('fecha_hora>=?',date('Y-m-d',strtotime($this->dia_activo)))
-    ->andWhere('fecha_hora <=?',date('Y-m-d',strtotime($this->fecha_limite)))
-    ->orderBy('fecha_hora')                    
-    ->execute();
-    
-    $this->horas_tomadas= array();                   
-    
-    foreach ($this->horas as $hora):    
-        array_push($this->horas_tomadas,$hora);                        
-    endforeach;        
-    
-    $cont_horas=0;
-    //$this->matriz= array(''=>array());
-    $this->matriz= array();
-    $cantidad_horas=count($this->horas_tomadas);    
-    
-    while($cont_horas<$cantidad_horas)
-    {
-        $dia_actual=$this->horas_tomadas[$cont_horas]->fecha_hora;                
-        $dia_sig=$dia_actual;
-        $horas_pedidas= array();                
-        
-            // Obtiene las horas pedidas para el dia actual
-            while($dia_sig==$dia_actual):
-                array_push($horas_pedidas,$this->horas_tomadas[$cont_horas]->hora_ini);            
-                $cont_horas++;            
-                if($cont_horas<$cantidad_horas)
-                {                
-                    $dia_sig=$this->horas_tomadas[$cont_horas]->fecha_hora;
-                }
-                else
-                {
-                    break;
-                }            
-            endwhile;
-
-        $this->matriz[$dia_actual]=$horas_pedidas;
-    }                         
-    
-    return $this->renderPartial('hora/modulos', array('matriz' => $this->matriz,
-                                                      'dia_activo' => $this->dia_activo, 
-                                                      'inicio' => $this->inicio, 
-                                                      'fecha_limite' => $this->fecha_limite,
-                                                      'num_modulos' => $this->num_modulos,
-                                                      'indice' => $this->indice));
-   }    
+    return sfView::NONE;        
+  }
+ 
 }

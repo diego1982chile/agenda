@@ -53,7 +53,7 @@ else
         <?php
         }                
         $cont_horas++;
-        $hora= date('H:i',strtotime($hora."+1 hours"));        
+        $hora= date('H:i',strtotime($hora."+".sfConfig::get('app_hora_intervalo_horas')." minutes"));        
     }
 }
 ?>       

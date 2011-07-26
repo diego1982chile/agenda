@@ -1,0 +1,10 @@
+
+#jquery-loader.blue-with-image-2{
+    border:none;
+    padding-top:35px;
+    background-color: red;/*transparent;*/
+    text-align: center;
+    background-image: img/ajax-loader.gif;
+    background-position: center center;
+    background-repeat: no-repeat;
+}

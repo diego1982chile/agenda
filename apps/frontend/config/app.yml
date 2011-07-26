@@ -15,9 +15,12 @@ all:
     from:
       email: "jonsxaero@gmail.com"
       fullname: "the staff at yoursite.com"
-  hora:
-    lim_horario_atencion:   17:00
-    inicio:                 08:00
-    modulos:                4
-    intervalo_horas:        1    
-    lim_fecha_atencion:     30
+ # hora:
+  #  lim_horario_atencion:   17:00
+   # inicio:                 08:00
+   # modulos:                4
+   # intervalo_horas:        1    
+   # lim_fecha_atencion:     30
+        
+    # intervalo_horas = periodo_atencion
+    # modulos = (hora_final - hora_inicial)/intervalo_horas

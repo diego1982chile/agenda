@@ -1,0 +1,14 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+all:  
+  hora:
+    lim_horario_atencion:   17:00
+    inicio:                 08:00
+    modulos:                4
+    intervalo_horas:        1    
+    lim_fecha_atencion:     30
+        
+    # intervalo_horas = periodo_atencion
+    # modulos = (hora_final - hora_inicial)/intervalo_horas
